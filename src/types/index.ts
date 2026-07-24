@@ -36,6 +36,14 @@ export interface Guardrail {
 /** Identifiers for the four primary enterprise AI platforms. */
 export type ToolId = 'claude' | 'chatgpt' | 'gemini' | 'copilot'
 
+/** A copyable, real-world prompt template for a platform. */
+export interface ToolUseCase {
+  /** Short workflow title, e.g. "Morning email triage" */
+  title: string
+  /** The copyable prompt body — copied verbatim; may carry [bracket] placeholders. */
+  prompt: string
+}
+
 /** A primary enterprise AI platform with Australian-market context. */
 export interface ToolPlatform {
   id: ToolId
@@ -49,6 +57,8 @@ export interface ToolPlatform {
   features: string[]
   /** 2–3 concrete analyst / intern use cases. */
   useCases: string[]
+  /** Copyable, real-world prompt templates shown in the "Real use cases" accordion. */
+  realUseCases: ToolUseCase[]
   /** One caution — what this platform does poorly or where it trips up. */
   watchOut: string
   /** Australian availability and/or enterprise relevance note. */

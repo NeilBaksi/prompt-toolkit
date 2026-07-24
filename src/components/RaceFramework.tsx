@@ -8,7 +8,7 @@ export function RaceFramework() {
       id="frameworks"
       index="01"
       title="The RACE Framework"
-      intro="Every prompt in this toolkit uses all four ingredients. Learn to spot them — then build your own."
+      intro="Every prompt in this starter pack uses all four ingredients. Learn to spot them — then build your own."
     >
       <ol className="grid grid-cols-1 gap-px overflow-hidden rounded-lg bg-rule sm:grid-cols-2">
         {raceItems.map((it, i) => (

@@ -2,6 +2,7 @@ import { ExternalLink, AlertTriangle, MapPin, ArrowUpRight, ShieldCheck } from '
 import { Section } from './layout/Section'
 import { Reveal } from './layout/Reveal'
 import { toolPlatforms, supportingTools, capabilityRows } from '../data/tools'
+import { UseCaseAccordion } from './UseCaseAccordion'
 import type { ToolId } from '../types'
 
 /** Roman numeral labels for editorial texture — one per platform block. */
@@ -79,6 +80,19 @@ export function Tools() {
                   </ol>
                 </div>
               </div>
+
+              {/* Real use cases — copyable prompt templates in an accordion */}
+              {platform.realUseCases.length > 0 && (
+                <div className="mt-8">
+                  <p className="kicker mb-1">Real use cases</p>
+                  <p className="mb-2 text-[0.85rem] leading-relaxed text-muted">
+                    Ready to use — replace the{' '}
+                    <span className="font-mono text-[0.85em] text-gold-deep">[brackets]</span> with
+                    your own context.
+                  </p>
+                  <UseCaseAccordion items={platform.realUseCases} idBase={platform.id} />
+                </div>
+              )}
 
               {/* Footer row: Watch out + AU note + doc link */}
               <div className="mt-6 space-y-3 border-t border-rule pt-5 sm:flex sm:items-start sm:gap-8 sm:space-y-0">
@@ -298,7 +312,7 @@ export function Tools() {
                 <em className="not-italic font-medium text-ink-soft">
                   "Which AI tools are approved here, and where is my data processed?"
                 </em>{' '}
-                The answer shapes every other decision in this toolkit — because your prompt is
+                The answer shapes every other decision in this starter pack — because your prompt is
                 processed on inference infrastructure that, in most cases, sits outside Australia.
               </p>
               <p className="mt-4 max-w-prose text-[0.92rem] leading-relaxed text-muted">

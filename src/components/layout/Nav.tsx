@@ -32,9 +32,9 @@ export function Nav() {
           href="#top"
           className="flex items-baseline gap-2 font-display text-lg font-black tracking-tight text-ink"
         >
-          Neil Baksi
-          <span className="font-mono text-[0.62rem] font-normal uppercase tracking-[0.2em] text-muted">
-            Prompt Toolkit
+          Prompt Starter Pack
+          <span className="hidden font-mono text-[0.62rem] font-normal uppercase tracking-[0.2em] text-muted sm:inline">
+            AI as Your Analyst
           </span>
         </a>
         <ul className="hidden items-center gap-6 md:flex">

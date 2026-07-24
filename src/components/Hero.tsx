@@ -18,7 +18,7 @@ export function Hero() {
       <div className="mx-auto max-w-6xl px-5 pb-16 pt-16 sm:px-8 sm:pb-24 sm:pt-24 lg:pt-28">
         <motion.div variants={container} initial="hidden" animate="show">
           <motion.p variants={item} className="kicker">
-            A Prompt Toolkit · by Neil Baksi
+            A Prompt Starter Pack · by Neil Baksi
           </motion.p>
 
           <motion.h1
@@ -33,7 +33,7 @@ export function Hero() {
             variants={item}
             className="mt-7 max-w-prose text-lg leading-relaxed text-ink-soft sm:text-xl"
           >
-            A prompt toolkit for you. Hit <span className="font-mono text-ink">Copy</span> on any
+            A prompt starter pack for you. Hit <span className="font-mono text-ink">Copy</span> on any
             prompt, paste it into Claude, ChatGPT or Gemini, and swap the{' '}
             <span className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-gold-deep">
               [brackets]

@@ -8,7 +8,7 @@
       "file_type": "code",
       "source_file": "tailwind.config.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 17,
       "norm_label": "tailwind.config.ts",
       "id": "tailwind_config_ts"
     },
@@ -17,7 +17,7 @@
       "file_type": "code",
       "source_file": "vite.config.ts",
       "source_location": "L1",
-      "community": 17,
+      "community": 18,
       "norm_label": "vite.config.ts",
       "id": "vite_config_ts"
     },
@@ -26,7 +26,7 @@
       "file_type": "code",
       "source_file": "postcss.config.js",
       "source_location": "L1",
-      "community": 18,
+      "community": 19,
       "norm_label": "postcss.config.js",
       "id": "postcss_config_js"
     },
@@ -35,7 +35,7 @@
       "file_type": "code",
       "source_file": "src/main.tsx",
       "source_location": "L1",
-      "community": 19,
+      "community": 20,
       "norm_label": "main.tsx",
       "id": "src_main_tsx"
     },
@@ -44,7 +44,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L1",
-      "community": 20,
+      "community": 21,
       "norm_label": "index.ts",
       "id": "src_types_index_ts"
     },
@@ -53,7 +53,7 @@
       "file_type": "code",
       "source_file": "src/components/RaceFramework.tsx",
       "source_location": "L1",
-      "community": 21,
+      "community": 22,
       "norm_label": "raceframework.tsx",
       "id": "src_components_raceframework_tsx"
     },
@@ -62,7 +62,7 @@
       "file_type": "code",
       "source_file": "src/components/UniversalPrompts.tsx",
       "source_location": "L1",
-      "community": 22,
+      "community": 23,
       "norm_label": "universalprompts.tsx",
       "id": "src_components_universalprompts_tsx"
     },
@@ -71,7 +71,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Footer.tsx",
       "source_location": "L1",
-      "community": 6,
+      "community": 7,
       "norm_label": "footer.tsx",
       "id": "src_components_layout_footer_tsx"
     },
@@ -79,8 +79,8 @@
       "label": "Footer()",
       "file_type": "code",
       "source_file": "src/components/layout/Footer.tsx",
-      "source_location": "L1",
-      "community": 6,
+      "source_location": "L3",
+      "community": 7,
       "norm_label": "footer()",
       "id": "footer_footer"
     },
@@ -89,7 +89,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Reveal.tsx",
       "source_location": "L1",
-      "community": 7,
+      "community": 8,
       "norm_label": "reveal.tsx",
       "id": "src_components_layout_reveal_tsx"
     },
@@ -98,7 +98,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Reveal.tsx",
       "source_location": "L19",
-      "community": 7,
+      "community": 8,
       "norm_label": "reveal()",
       "id": "reveal_reveal"
     },
@@ -134,7 +134,7 @@
       "file_type": "code",
       "source_file": "src/data/frameworks.ts",
       "source_location": "L1",
-      "community": 23,
+      "community": 24,
       "norm_label": "frameworks.ts",
       "id": "src_data_frameworks_ts"
     },
@@ -143,7 +143,7 @@
       "file_type": "code",
       "source_file": "src/data/prompts.ts",
       "source_location": "L1",
-      "community": 24,
+      "community": 25,
       "norm_label": "prompts.ts",
       "id": "src_data_prompts_ts"
     },
@@ -243,7 +243,7 @@
       "file_type": "code",
       "source_file": "src/App.tsx",
       "source_location": "L1",
-      "community": 8,
+      "community": 9,
       "norm_label": "app.tsx",
       "id": "src_app_tsx"
     },
@@ -252,7 +252,7 @@
       "file_type": "code",
       "source_file": "src/App.tsx",
       "source_location": "L11",
-      "community": 8,
+      "community": 9,
       "norm_label": "app()",
       "id": "app_app"
     },
@@ -261,7 +261,7 @@
       "file_type": "code",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L1",
-      "community": 9,
+      "community": 10,
       "norm_label": "hero.tsx",
       "id": "src_components_hero_tsx"
     },
@@ -270,7 +270,7 @@
       "file_type": "code",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L15",
-      "community": 9,
+      "community": 10,
       "norm_label": "hero()",
       "id": "hero_hero"
     },
@@ -279,7 +279,7 @@
       "file_type": "code",
       "source_file": "src/components/NonNegotiables.tsx",
       "source_location": "L1",
-      "community": 10,
+      "community": 11,
       "norm_label": "nonnegotiables.tsx",
       "id": "src_components_nonnegotiables_tsx"
     },
@@ -288,7 +288,7 @@
       "file_type": "code",
       "source_file": "src/components/NonNegotiables.tsx",
       "source_location": "L9",
-      "community": 10,
+      "community": 11,
       "norm_label": "nonnegotiables()",
       "id": "nonnegotiables_nonnegotiables"
     },
@@ -297,7 +297,7 @@
       "file_type": "code",
       "source_file": "src/components/PromptExplorer.tsx",
       "source_location": "L1",
-      "community": 11,
+      "community": 12,
       "norm_label": "promptexplorer.tsx",
       "id": "src_components_promptexplorer_tsx"
     },
@@ -306,7 +306,7 @@
       "file_type": "code",
       "source_file": "src/components/PromptExplorer.tsx",
       "source_location": "L15",
-      "community": 11,
+      "community": 12,
       "norm_label": "ontabkeydown()",
       "id": "promptexplorer_ontabkeydown"
     },
@@ -315,7 +315,7 @@
       "file_type": "code",
       "source_file": "src/components/PromptCard.tsx",
       "source_location": "L1",
-      "community": 12,
+      "community": 13,
       "norm_label": "promptcard.tsx",
       "id": "src_components_promptcard_tsx"
     },
@@ -324,7 +324,7 @@
       "file_type": "code",
       "source_file": "src/components/PromptCard.tsx",
       "source_location": "L28",
-      "community": 12,
+      "community": 13,
       "norm_label": "clsx()",
       "id": "promptcard_clsx"
     },
@@ -351,7 +351,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Nav.tsx",
       "source_location": "L1",
-      "community": 13,
+      "community": 14,
       "norm_label": "nav.tsx",
       "id": "src_components_layout_nav_tsx"
     },
@@ -360,7 +360,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Nav.tsx",
       "source_location": "L12",
-      "community": 13,
+      "community": 14,
       "norm_label": "nav()",
       "id": "nav_nav"
     },
@@ -369,7 +369,7 @@
       "file_type": "code",
       "source_file": "src/components/layout/Section.tsx",
       "source_location": "L1",
-      "community": 25,
+      "community": 26,
       "norm_label": "section.tsx",
       "id": "src_components_layout_section_tsx"
     },
@@ -712,7 +712,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "framer motion",
       "id": "readme_framer_motion"
     },
@@ -751,7 +751,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 16,
       "norm_label": "prefers-reduced-motion / keyboard-accessible ui",
       "id": "readme_accessibility"
     },
@@ -773,18 +773,45 @@
       "file_type": "code",
       "source_file": "src/components/Tools.tsx",
       "source_location": "L1",
-      "id": "src_components_tools_tsx",
-      "community": 26,
-      "norm_label": "tools.tsx"
+      "community": 27,
+      "norm_label": "tools.tsx",
+      "id": "src_components_tools_tsx"
     },
     {
       "label": "tools.ts",
       "file_type": "code",
       "source_file": "src/data/tools.ts",
       "source_location": "L1",
-      "id": "src_data_tools_ts",
-      "community": 27,
-      "norm_label": "tools.ts"
+      "community": 28,
+      "norm_label": "tools.ts",
+      "id": "src_data_tools_ts"
+    },
+    {
+      "label": "UseCaseAccordion.tsx",
+      "file_type": "code",
+      "source_file": "src/components/UseCaseAccordion.tsx",
+      "source_location": "L1",
+      "id": "src_components_usecaseaccordion_tsx",
+      "community": 6,
+      "norm_label": "usecaseaccordion.tsx"
+    },
+    {
+      "label": "renderPrompt()",
+      "file_type": "code",
+      "source_file": "src/components/UseCaseAccordion.tsx",
+      "source_location": "L10",
+      "id": "usecaseaccordion_renderprompt",
+      "community": 6,
+      "norm_label": "renderprompt()"
+    },
+    {
+      "label": "clsx()",
+      "file_type": "code",
+      "source_file": "src/components/UseCaseAccordion.tsx",
+      "source_location": "L47",
+      "id": "usecaseaccordion_clsx",
+      "community": 6,
+      "norm_label": "clsx()"
     }
   ],
   "links": [
@@ -792,7 +819,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/layout/Footer.tsx",
-      "source_location": "L1",
+      "source_location": "L3",
       "weight": 1.0,
       "_src": "src_components_layout_footer_tsx",
       "_tgt": "footer_footer",
@@ -1471,6 +1498,30 @@
       "_tgt": "readme_accessibility",
       "source": "readme_framer_motion",
       "target": "readme_accessibility"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/UseCaseAccordion.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_src": "src_components_usecaseaccordion_tsx",
+      "_tgt": "usecaseaccordion_renderprompt",
+      "source": "src_components_usecaseaccordion_tsx",
+      "target": "usecaseaccordion_renderprompt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/UseCaseAccordion.tsx",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_src": "src_components_usecaseaccordion_tsx",
+      "_tgt": "usecaseaccordion_clsx",
+      "source": "src_components_usecaseaccordion_tsx",
+      "target": "usecaseaccordion_clsx",
+      "confidence_score": 1.0
     }
   ],
   "hyperedges": []

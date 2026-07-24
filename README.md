@@ -1,6 +1,6 @@
-# AI as Your Analyst — Prompt Toolkit
+# AI as Your Analyst — Prompt Starter Pack
 
-A live, shareable prompt toolkit for analysts, consultants, and MBAs. Copy a
+A shareable prompt starter pack for analysts, consultants, and MBAs. Copy a
 prompt, paste it into **Claude, ChatGPT, or Gemini**, swap the `[brackets]` for
 your real context, and get client-ready output. Built by Neil Baksi.
 

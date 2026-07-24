@@ -25,6 +25,23 @@ export const toolPlatforms: ToolPlatform[] = [
       'Run multi-document due-diligence across 50+ PDFs in a single Project, with instructions pinned so every follow-up stays on-brief',
       'Use MCP connectors to query a client\'s Salesforce CRM and draft account-review slides without copy-pasting data',
     ],
+    realUseCases: [
+      {
+        title: 'Morning email triage',
+        prompt:
+          'Every weekday at 8am, scan my inbox from the last 18 hours. Produce:\n1. Emails needing a reply — summarise each in one sentence and draft a response\n2. Action items mentioned in emails — pull into a to-do list\n3. FYI emails I can archive — list with a one-sentence summary each\nFlag anything from [manager name] or [client name] as high priority.',
+      },
+      {
+        title: 'Weekly status report, automated',
+        prompt:
+          "Every Friday at 4pm, build this week's status report.\nPull from:\n- My project folder: [folder path]\n- Slack channel: [#project-channel]\n- My calendar for the week\nOutput a formatted document using the template at [template path].\nSections: Progress this week · Decisions made · Blockers · Next week's priorities.\nSave as \"Status Report [date]\".",
+      },
+      {
+        title: 'Meeting notes → action items',
+        prompt:
+          'These are raw notes from today\'s client meeting. Do three things:\n1. Extract all action items as a table: | Action | Owner | Due |\n2. List decisions made (numbered)\n3. Draft a follow-up email to the client summarising both — professional, under 200 words, with a subject line\nNotes: [paste raw notes here]',
+      },
+    ],
     watchOut: 'No native desktop app or Microsoft 365 integration — requires browser or API; web access is a toggle, not always on by default.',
     auNote: 'Available at claude.ai across all Australian states; API accessible via Anthropic directly, AWS Bedrock, Google Vertex AI, and Azure. Anthropic signed an MOU with the Australian Government on AI safety (2026).',
     docHref: 'https://platform.claude.ai/docs/en/home',
@@ -45,6 +62,23 @@ export const toolPlatforms: ToolPlatform[] = [
       'Set Agent Mode to pull competitor press releases, cross-reference with internal strategy docs, and produce a two-page briefing — unattended',
       'Use Deep Research to synthesise analyst reports on a sector; restrict sources to Bloomberg, ASIC filings, and ASX announcements',
       'Connect the Salesforce and Google Drive connectors so an associate can ask "what is our current exposure to Client X?" without opening two tabs',
+    ],
+    realUseCases: [
+      {
+        title: 'Find any internal document, instantly',
+        prompt:
+          'Search our SharePoint and Google Drive for documents related to [project / client / topic] from the last [6 months]. Summarise what you find:\n- What documents exist\n- Key decisions or findings in each (1–2 sentences)\n- Which one I should read first, and why\n@SharePoint @GoogleDrive',
+      },
+      {
+        title: 'Competitive research report',
+        prompt:
+          'Run a deep research report on [competitor / market / topic]. I need:\n- Recent news and strategic moves (last 6 months)\n- Financial performance highlights if listed on the ASX\n- How they are positioning against us: [our company / client]\n- 3 implications for our strategy\nCross-reference with any internal docs you find. Cite all sources.',
+      },
+      {
+        title: 'Onboard to a new project in minutes',
+        prompt:
+          'I just joined the [project name] team. Bring me up to speed. Search our shared project folder @SharePoint and #project-channel @Slack. Tell me:\n1. What is this project trying to achieve?\n2. Where are we in the timeline?\n3. What are the open questions or unresolved decisions?\n4. Who are the key people and what do they own?\n5. What should I read first to get context fastest?',
+      },
     ],
     watchOut: 'Agent Mode is disabled by default for Enterprise workspaces; admins must enable it per role — onboarding friction for new tenants.',
     auNote: 'ChatGPT Enterprise is available in Australia; data processing terms comply with the Australian Privacy Principles under the OpenAI Data Processing Agreement. No sovereign Australian data residency guarantee.',
@@ -67,6 +101,23 @@ export const toolPlatforms: ToolPlatform[] = [
       'In Sheets, generate a full financial model from a prompt; Gemini populates formulas and chart types against your existing data',
       'After a client meeting in Meet, receive an AI-generated action-item list and draft follow-up email within five minutes',
     ],
+    realUseCases: [
+      {
+        title: 'Search your entire Drive for context',
+        prompt:
+          'Search all my Drive files and Gmail for anything related to [project / client / topic]. Give me:\n- What files exist and what they cover (one sentence each)\n- Key data, decisions, or conclusions I should know\n- Whether there is a template or framework I should use as a starting point\n(Open the Gemini sidebar in Drive and type this directly there.)',
+      },
+      {
+        title: 'NotebookLM — deep research synthesis',
+        prompt:
+          "I've uploaded [N] sources to this notebook. Do three things:\n1. What is the single most important insight that appears across multiple sources?\n2. Where do the sources disagree or show conflicting evidence?\n3. Generate a one-page briefing: headline finding, 3 supporting insights, and implications for [decision / recommendation]\nCite the specific source for every claim.\n(Use this in NotebookLM after uploading your sources.)",
+      },
+      {
+        title: 'Build a tracking sheet from scratch',
+        prompt:
+          'Build a project tracker spreadsheet for an [8-week] consulting internship project.\nColumns: Task | Workstream | Owner | Priority (High/Med/Low) | Status (Not started/In progress/Done/Blocked) | Due Date | Notes\nInclude:\n- Conditional formatting: red = Blocked, yellow = In progress, green = Done\n- A summary row at the top counting tasks by status\n- Pre-populate with the typical workstreams for this type of project\n(Use this in the Gemini sidebar of Google Sheets.)',
+      },
+    ],
     watchOut: 'Quality degrades on highly specialised or quantitative reasoning tasks; better for synthesis and drafting than for novel analysis.',
     auNote: 'Gemini is included in all Google Workspace Business and Enterprise plans sold in Australia from 2025 onward — no separate AI licence needed. Pricing is in USD; AUD billing varies by reseller.',
     docHref: 'https://workspace.google.com/solutions/ai/',
@@ -87,6 +138,23 @@ export const toolPlatforms: ToolPlatform[] = [
       'Summarise a 30-day Teams channel thread and extract open action items before a project stand-up',
       'In Outlook, draft a client-ready response grounded in the last three email threads — one prompt, no copy-pasting',
       'Use a Copilot Agent to query SharePoint and surface the correct version of a compliance policy for an APRA audit',
+    ],
+    realUseCases: [
+      {
+        title: 'Teams thread digest before a stand-up',
+        prompt:
+          'Summarise the [#channel or meeting] Teams conversation from the last [7 days]. Give me:\n1. Key decisions made, with who made them\n2. Open action items as a table: | Action | Owner | Due |\n3. Any unresolved questions I should raise at the next stand-up\nKeep it under one screen.',
+      },
+      {
+        title: 'Outlook reply grounded in the thread',
+        prompt:
+          'Draft a client-ready reply to the latest email in this thread. Ground it in the last [3] emails so nothing is repeated or contradicted. Tone: professional and concise, under 150 words. Confirm [the deliverable / next step], propose [a time], and leave a placeholder for anything I still need to check: [open item].',
+      },
+      {
+        title: 'Excel model or tracker from a prompt',
+        prompt:
+          'In this sheet, build a [project tracker / simple 3-year revenue model] from my data in [range].\nInclude:\n- Sensible column headers and formulas (totals, growth %, status counts)\n- Conditional formatting to flag [blocked items / negative variance]\n- A summary block at the top with the headline numbers\nExplain any assumptions you made so I can check them.',
+      },
     ],
     watchOut: 'Requires an add-on licence (~AUD $40–45 /user/month) on top of existing M365 subscriptions; cost is the most common barrier to full-org deployment.',
     auNote: 'The dominant enterprise AI platform across Australian government and large corporates. Aligns with the Privacy Act 1988 (Australian Privacy Principles) and supports Essential Eight controls via native M365 security tooling. Microsoft publishes Essential Eight mapping guidance.',
