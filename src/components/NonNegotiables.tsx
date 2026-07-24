@@ -10,7 +10,7 @@ export function NonNegotiables() {
   return (
     <Section
       id="non-negotiables"
-      index="04"
+      index="05"
       title="The Non-Negotiables"
       intro="Fluency in AI also means knowing exactly where the lines are."
     >

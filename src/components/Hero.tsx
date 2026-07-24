@@ -33,7 +33,7 @@ export function Hero() {
             variants={item}
             className="mt-7 max-w-prose text-lg leading-relaxed text-ink-soft sm:text-xl"
           >
-            A live prompt toolkit. Hit <span className="font-mono text-ink">Copy</span> on any
+            A prompt toolkit for you. Hit <span className="font-mono text-ink">Copy</span> on any
             prompt, paste it into Claude, ChatGPT or Gemini, and swap the{' '}
             <span className="rounded bg-paper-2 px-1.5 py-0.5 font-mono text-[0.85em] text-gold-deep">
               [brackets]

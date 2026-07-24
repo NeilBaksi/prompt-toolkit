@@ -5,6 +5,7 @@ const LINKS = [
   { href: '#frameworks', label: 'Frameworks' },
   { href: '#primers', label: 'Primers' },
   { href: '#universal', label: 'Universal' },
+  { href: '#tools', label: 'Tools' },
   { href: '#non-negotiables', label: 'Non-Negotiables' },
 ]
 

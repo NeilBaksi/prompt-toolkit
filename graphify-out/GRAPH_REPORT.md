@@ -1,11 +1,11 @@
 # Graph Report - .  (2026-07-25)
 
 ## Corpus Check
-- 0 files · ~99,999 words
+- 71 files · ~99,999 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 69 nodes · 57 edges · 26 communities detected
+- 71 nodes · 57 edges · 28 communities detected
 - Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
@@ -36,6 +36,8 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `AI as Your Analyst - Prompt Toolkit` - 21 edges
@@ -159,6 +161,14 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 26 - "Community 26"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 27 - "Community 27"
+Cohesion: 1.0
+Nodes (0): 
+
 ## Knowledge Gaps
 - **18 isolated node(s):** `Google Fonts (Playfair Display, Epilogue, JetBrains Mono)`, `Analysts, Consultants, MBAs`, `Claude`, `ChatGPT`, `Gemini` (+13 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -202,14 +212,18 @@ Nodes (0):
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 25`** (1 nodes): `Section.tsx`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 26`** (1 nodes): `Tools.tsx`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 27`** (1 nodes): `tools.ts`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `AI as Your Analyst - Prompt Toolkit` connect `Community 0` to `Community 1`, `Community 5`, `Community 14`, `Community 15`?**
-  _High betweenness centrality (0.146) - this node is a cross-community bridge._
+  _High betweenness centrality (0.138) - this node is a cross-community bridge._
 - **Why does `Context Primers & Prompts` connect `Community 1` to `Community 0`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `ChatGPT (LLM)` (e.g. with `Claude (LLM)` and `Gemini (LLM)`) actually correct?**
   _`ChatGPT (LLM)` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `Fully Static Site` (e.g. with `Live Demo (GitHub Pages)` and `No Login/Backend/Tracking`) actually correct?**

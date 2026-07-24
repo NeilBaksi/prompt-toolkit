@@ -243,153 +243,153 @@
       "file_type": "code",
       "source_file": "src/App.tsx",
       "source_location": "L1",
-      "id": "src_app_tsx",
       "community": 8,
-      "norm_label": "app.tsx"
+      "norm_label": "app.tsx",
+      "id": "src_app_tsx"
     },
     {
       "label": "App()",
       "file_type": "code",
       "source_file": "src/App.tsx",
-      "source_location": "L10",
-      "id": "app_app",
+      "source_location": "L11",
       "community": 8,
-      "norm_label": "app()"
+      "norm_label": "app()",
+      "id": "app_app"
     },
     {
       "label": "Hero.tsx",
       "file_type": "code",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L1",
-      "id": "src_components_hero_tsx",
       "community": 9,
-      "norm_label": "hero.tsx"
+      "norm_label": "hero.tsx",
+      "id": "src_components_hero_tsx"
     },
     {
       "label": "Hero()",
       "file_type": "code",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L15",
-      "id": "hero_hero",
       "community": 9,
-      "norm_label": "hero()"
+      "norm_label": "hero()",
+      "id": "hero_hero"
     },
     {
       "label": "NonNegotiables.tsx",
       "file_type": "code",
       "source_file": "src/components/NonNegotiables.tsx",
       "source_location": "L1",
-      "id": "src_components_nonnegotiables_tsx",
       "community": 10,
-      "norm_label": "nonnegotiables.tsx"
+      "norm_label": "nonnegotiables.tsx",
+      "id": "src_components_nonnegotiables_tsx"
     },
     {
       "label": "NonNegotiables()",
       "file_type": "code",
       "source_file": "src/components/NonNegotiables.tsx",
       "source_location": "L9",
-      "id": "nonnegotiables_nonnegotiables",
       "community": 10,
-      "norm_label": "nonnegotiables()"
+      "norm_label": "nonnegotiables()",
+      "id": "nonnegotiables_nonnegotiables"
     },
     {
       "label": "PromptExplorer.tsx",
       "file_type": "code",
       "source_file": "src/components/PromptExplorer.tsx",
       "source_location": "L1",
-      "id": "src_components_promptexplorer_tsx",
       "community": 11,
-      "norm_label": "promptexplorer.tsx"
+      "norm_label": "promptexplorer.tsx",
+      "id": "src_components_promptexplorer_tsx"
     },
     {
       "label": "onTabKeyDown()",
       "file_type": "code",
       "source_file": "src/components/PromptExplorer.tsx",
       "source_location": "L15",
-      "id": "promptexplorer_ontabkeydown",
       "community": 11,
-      "norm_label": "ontabkeydown()"
+      "norm_label": "ontabkeydown()",
+      "id": "promptexplorer_ontabkeydown"
     },
     {
       "label": "PromptCard.tsx",
       "file_type": "code",
       "source_file": "src/components/PromptCard.tsx",
       "source_location": "L1",
-      "id": "src_components_promptcard_tsx",
       "community": 12,
-      "norm_label": "promptcard.tsx"
+      "norm_label": "promptcard.tsx",
+      "id": "src_components_promptcard_tsx"
     },
     {
       "label": "clsx()",
       "file_type": "code",
       "source_file": "src/components/PromptCard.tsx",
       "source_location": "L28",
-      "id": "promptcard_clsx",
       "community": 12,
-      "norm_label": "clsx()"
+      "norm_label": "clsx()",
+      "id": "promptcard_clsx"
     },
     {
       "label": "Toast.tsx",
       "file_type": "code",
       "source_file": "src/components/Toast.tsx",
       "source_location": "L1",
-      "id": "src_components_toast_tsx",
       "community": 3,
-      "norm_label": "toast.tsx"
+      "norm_label": "toast.tsx",
+      "id": "src_components_toast_tsx"
     },
     {
       "label": "useToast()",
       "file_type": "code",
       "source_file": "src/components/Toast.tsx",
       "source_location": "L14",
-      "id": "toast_usetoast",
       "community": 3,
-      "norm_label": "usetoast()"
+      "norm_label": "usetoast()",
+      "id": "toast_usetoast"
     },
     {
       "label": "Nav.tsx",
       "file_type": "code",
       "source_file": "src/components/layout/Nav.tsx",
       "source_location": "L1",
-      "id": "src_components_layout_nav_tsx",
       "community": 13,
-      "norm_label": "nav.tsx"
+      "norm_label": "nav.tsx",
+      "id": "src_components_layout_nav_tsx"
     },
     {
       "label": "Nav()",
       "file_type": "code",
       "source_file": "src/components/layout/Nav.tsx",
-      "source_location": "L11",
-      "id": "nav_nav",
+      "source_location": "L12",
       "community": 13,
-      "norm_label": "nav()"
+      "norm_label": "nav()",
+      "id": "nav_nav"
     },
     {
       "label": "Section.tsx",
       "file_type": "code",
       "source_file": "src/components/layout/Section.tsx",
       "source_location": "L1",
-      "id": "src_components_layout_section_tsx",
       "community": 25,
-      "norm_label": "section.tsx"
+      "norm_label": "section.tsx",
+      "id": "src_components_layout_section_tsx"
     },
     {
       "label": "useCopy.ts",
       "file_type": "code",
       "source_file": "src/hooks/useCopy.ts",
       "source_location": "L1",
-      "id": "src_hooks_usecopy_ts",
       "community": 3,
-      "norm_label": "usecopy.ts"
+      "norm_label": "usecopy.ts",
+      "id": "src_hooks_usecopy_ts"
     },
     {
       "label": "useCopy()",
       "file_type": "code",
       "source_file": "src/hooks/useCopy.ts",
       "source_location": "L9",
-      "id": "usecopy_usecopy",
       "community": 3,
-      "norm_label": "usecopy()"
+      "norm_label": "usecopy()",
+      "id": "usecopy_usecopy"
     },
     {
       "label": "AI as Your Analyst - Prompt Toolkit",
@@ -400,9 +400,9 @@
       "captured_at": null,
       "author": "Neil Baksi",
       "contributor": null,
-      "id": "readme_prompt_toolkit",
       "community": 0,
-      "norm_label": "ai as your analyst - prompt toolkit"
+      "norm_label": "ai as your analyst - prompt toolkit",
+      "id": "readme_prompt_toolkit"
     },
     {
       "label": "Neil Baksi",
@@ -413,9 +413,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_neil_baksi",
       "community": 15,
-      "norm_label": "neil baksi"
+      "norm_label": "neil baksi",
+      "id": "readme_neil_baksi"
     },
     {
       "label": "Live Demo (GitHub Pages)",
@@ -426,9 +426,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_live_demo",
       "community": 5,
-      "norm_label": "live demo (github pages)"
+      "norm_label": "live demo (github pages)",
+      "id": "readme_live_demo"
     },
     {
       "label": "Analysts, Consultants, MBAs",
@@ -439,9 +439,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_target_audience",
       "community": 0,
-      "norm_label": "analysts, consultants, mbas"
+      "norm_label": "analysts, consultants, mbas",
+      "id": "readme_target_audience"
     },
     {
       "label": "Claude",
@@ -452,9 +452,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_claude",
       "community": 0,
-      "norm_label": "claude"
+      "norm_label": "claude",
+      "id": "readme_claude"
     },
     {
       "label": "ChatGPT",
@@ -465,9 +465,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_chatgpt",
       "community": 0,
-      "norm_label": "chatgpt"
+      "norm_label": "chatgpt",
+      "id": "readme_chatgpt"
     },
     {
       "label": "Gemini",
@@ -478,9 +478,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_gemini",
       "community": 0,
-      "norm_label": "gemini"
+      "norm_label": "gemini",
+      "id": "readme_gemini"
     },
     {
       "label": "RACE Framework (Role, Action, Context, Example)",
@@ -491,9 +491,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_race_framework",
       "community": 0,
-      "norm_label": "race framework (role, action, context, example)"
+      "norm_label": "race framework (role, action, context, example)",
+      "id": "readme_race_framework"
     },
     {
       "label": "Context Primers & Prompts",
@@ -504,9 +504,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_context_primers",
       "community": 1,
-      "norm_label": "context primers & prompts"
+      "norm_label": "context primers & prompts",
+      "id": "readme_context_primers"
     },
     {
       "label": "Universal Prompts",
@@ -517,9 +517,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_universal_prompts",
       "community": 1,
-      "norm_label": "universal prompts"
+      "norm_label": "universal prompts",
+      "id": "readme_universal_prompts"
     },
     {
       "label": "The Non-Negotiables (Guardrails)",
@@ -530,9 +530,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_non_negotiables",
       "community": 0,
-      "norm_label": "the non-negotiables (guardrails)"
+      "norm_label": "the non-negotiables (guardrails)",
+      "id": "readme_non_negotiables"
     },
     {
       "label": "General Track",
@@ -543,9 +543,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_general",
       "community": 1,
-      "norm_label": "general track"
+      "norm_label": "general track",
+      "id": "readme_track_general"
     },
     {
       "label": "Consulting Track",
@@ -556,9 +556,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_consulting",
       "community": 1,
-      "norm_label": "consulting track"
+      "norm_label": "consulting track",
+      "id": "readme_track_consulting"
     },
     {
       "label": "Finance/IB Track",
@@ -569,9 +569,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_finance_ib",
       "community": 1,
-      "norm_label": "finance/ib track"
+      "norm_label": "finance/ib track",
+      "id": "readme_track_finance_ib"
     },
     {
       "label": "Tech/PM Track",
@@ -582,9 +582,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_tech_pm",
       "community": 1,
-      "norm_label": "tech/pm track"
+      "norm_label": "tech/pm track",
+      "id": "readme_track_tech_pm"
     },
     {
       "label": "CPG/Marketing Track",
@@ -595,9 +595,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_cpg_marketing",
       "community": 1,
-      "norm_label": "cpg/marketing track"
+      "norm_label": "cpg/marketing track",
+      "id": "readme_track_cpg_marketing"
     },
     {
       "label": "Healthcare Track",
@@ -608,9 +608,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_track_healthcare",
       "community": 1,
-      "norm_label": "healthcare track"
+      "norm_label": "healthcare track",
+      "id": "readme_track_healthcare"
     },
     {
       "label": "Australian-Market Framing",
@@ -621,9 +621,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_australian_framing",
       "community": 1,
-      "norm_label": "australian-market framing"
+      "norm_label": "australian-market framing",
+      "id": "readme_australian_framing"
     },
     {
       "label": "One-Click Copy Button",
@@ -634,9 +634,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_copy_button",
       "community": 0,
-      "norm_label": "one-click copy button"
+      "norm_label": "one-click copy button",
+      "id": "readme_copy_button"
     },
     {
       "label": "No Login/Backend/Tracking",
@@ -647,9 +647,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_no_backend_privacy",
       "community": 5,
-      "norm_label": "no login/backend/tracking"
+      "norm_label": "no login/backend/tracking",
+      "id": "readme_no_backend_privacy"
     },
     {
       "label": "Vite",
@@ -660,9 +660,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_vite",
       "community": 0,
-      "norm_label": "vite"
+      "norm_label": "vite",
+      "id": "readme_vite"
     },
     {
       "label": "React 19",
@@ -673,9 +673,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_react19",
       "community": 0,
-      "norm_label": "react 19"
+      "norm_label": "react 19",
+      "id": "readme_react19"
     },
     {
       "label": "TypeScript",
@@ -686,9 +686,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_typescript",
       "community": 0,
-      "norm_label": "typescript"
+      "norm_label": "typescript",
+      "id": "readme_typescript"
     },
     {
       "label": "Tailwind CSS v3",
@@ -699,9 +699,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_tailwind_v3",
       "community": 0,
-      "norm_label": "tailwind css v3"
+      "norm_label": "tailwind css v3",
+      "id": "readme_tailwind_v3"
     },
     {
       "label": "Framer Motion",
@@ -712,9 +712,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_framer_motion",
       "community": 14,
-      "norm_label": "framer motion"
+      "norm_label": "framer motion",
+      "id": "readme_framer_motion"
     },
     {
       "label": "lucide-react",
@@ -725,9 +725,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_lucide_react",
       "community": 0,
-      "norm_label": "lucide-react"
+      "norm_label": "lucide-react",
+      "id": "readme_lucide_react"
     },
     {
       "label": "Fully Static Site",
@@ -738,9 +738,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_static_site",
       "community": 5,
-      "norm_label": "fully static site"
+      "norm_label": "fully static site",
+      "id": "readme_static_site"
     },
     {
       "label": "prefers-reduced-motion / Keyboard-Accessible UI",
@@ -751,9 +751,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_accessibility",
       "community": 14,
-      "norm_label": "prefers-reduced-motion / keyboard-accessible ui"
+      "norm_label": "prefers-reduced-motion / keyboard-accessible ui",
+      "id": "readme_accessibility"
     },
     {
       "label": "MIT License",
@@ -764,9 +764,27 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_mit_license",
       "community": 15,
-      "norm_label": "mit license"
+      "norm_label": "mit license",
+      "id": "readme_mit_license"
+    },
+    {
+      "label": "Tools.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Tools.tsx",
+      "source_location": "L1",
+      "id": "src_components_tools_tsx",
+      "community": 26,
+      "norm_label": "tools.tsx"
+    },
+    {
+      "label": "tools.ts",
+      "file_type": "code",
+      "source_file": "src/data/tools.ts",
+      "source_location": "L1",
+      "id": "src_data_tools_ts",
+      "community": 27,
+      "norm_label": "tools.ts"
     }
   ],
   "links": [
@@ -942,13 +960,13 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/App.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0,
       "_src": "src_app_tsx",
       "_tgt": "app_app",
+      "confidence_score": 1.0,
       "source": "src_app_tsx",
-      "target": "app_app",
-      "confidence_score": 1.0
+      "target": "app_app"
     },
     {
       "relation": "contains",
@@ -958,9 +976,9 @@
       "weight": 1.0,
       "_src": "src_components_hero_tsx",
       "_tgt": "hero_hero",
+      "confidence_score": 1.0,
       "source": "src_components_hero_tsx",
-      "target": "hero_hero",
-      "confidence_score": 1.0
+      "target": "hero_hero"
     },
     {
       "relation": "contains",
@@ -970,9 +988,9 @@
       "weight": 1.0,
       "_src": "src_components_nonnegotiables_tsx",
       "_tgt": "nonnegotiables_nonnegotiables",
+      "confidence_score": 1.0,
       "source": "src_components_nonnegotiables_tsx",
-      "target": "nonnegotiables_nonnegotiables",
-      "confidence_score": 1.0
+      "target": "nonnegotiables_nonnegotiables"
     },
     {
       "relation": "contains",
@@ -982,9 +1000,9 @@
       "weight": 1.0,
       "_src": "src_components_promptexplorer_tsx",
       "_tgt": "promptexplorer_ontabkeydown",
+      "confidence_score": 1.0,
       "source": "src_components_promptexplorer_tsx",
-      "target": "promptexplorer_ontabkeydown",
-      "confidence_score": 1.0
+      "target": "promptexplorer_ontabkeydown"
     },
     {
       "relation": "contains",
@@ -994,9 +1012,9 @@
       "weight": 1.0,
       "_src": "src_components_promptcard_tsx",
       "_tgt": "promptcard_clsx",
+      "confidence_score": 1.0,
       "source": "src_components_promptcard_tsx",
-      "target": "promptcard_clsx",
-      "confidence_score": 1.0
+      "target": "promptcard_clsx"
     },
     {
       "relation": "contains",
@@ -1006,9 +1024,9 @@
       "weight": 1.0,
       "_src": "src_components_toast_tsx",
       "_tgt": "toast_usetoast",
+      "confidence_score": 1.0,
       "source": "src_components_toast_tsx",
-      "target": "toast_usetoast",
-      "confidence_score": 1.0
+      "target": "toast_usetoast"
     },
     {
       "relation": "calls",
@@ -1026,13 +1044,13 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/layout/Nav.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_src": "src_components_layout_nav_tsx",
       "_tgt": "nav_nav",
+      "confidence_score": 1.0,
       "source": "src_components_layout_nav_tsx",
-      "target": "nav_nav",
-      "confidence_score": 1.0
+      "target": "nav_nav"
     },
     {
       "relation": "contains",
@@ -1042,9 +1060,9 @@
       "weight": 1.0,
       "_src": "src_hooks_usecopy_ts",
       "_tgt": "usecopy_usecopy",
+      "confidence_score": 1.0,
       "source": "src_hooks_usecopy_ts",
-      "target": "usecopy_usecopy",
-      "confidence_score": 1.0
+      "target": "usecopy_usecopy"
     },
     {
       "relation": "references",

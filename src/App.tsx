@@ -5,6 +5,7 @@ import { Hero } from './components/Hero'
 import { RaceFramework } from './components/RaceFramework'
 import { PromptExplorer } from './components/PromptExplorer'
 import { UniversalPrompts } from './components/UniversalPrompts'
+import { Tools } from './components/Tools'
 import { NonNegotiables } from './components/NonNegotiables'
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         <RaceFramework />
         <PromptExplorer />
         <UniversalPrompts />
+        <Tools />
         <NonNegotiables />
       </main>
       <Footer />
