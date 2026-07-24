@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper font-body text-ink antialiased;
+    overflow-x: hidden; /* backstop against any child overflow on small screens */
+    /* faint paper grain via layered radial tints — subtle, editorial */
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(200, 144, 10, 0.03), transparent 42%),
+      radial-gradient(circle at 88% 82%, rgba(14, 12, 10, 0.025), transparent 46%);
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-gold/25 text-ink;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  /* Consistent, visible focus ring across all interactive elements */
+  :focus-visible {
+    outline: 2px solid theme('colors.gold');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Editorial section eyebrow, e.g. "01" numerals + kicker */
+  .kicker {
+    @apply font-mono text-[0.7rem] uppercase tracking-[0.22em] text-muted;
+  }
+
+  /* Copyable prompt body — never forces horizontal page scroll on mobile */
+  .prompt-body {
+    @apply whitespace-pre-wrap break-words font-mono text-[0.82rem] leading-relaxed text-ink-soft;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Respect reduced-motion: disable transforms/animations project-wide */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

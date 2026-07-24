@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>graphify - graphify-out/graph.html</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
+  #search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
+  .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .search-item:hover { background: #2a2a4e; }
+  #info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: #e0e0e0; }
+  #info-content .empty { color: #555; font-style: italic; }
+  .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid #333; }
+  .neighbor-link:hover { background: #2a2a4e; }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
+  .legend-item:hover { background: #2a2a4e; padding-left: 4px; }
+  .legend-item.dimmed { opacity: 0.35; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .legend-count { color: #666; font-size: 11px; }
+  #stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
+</style>
+</head>
+<body>
+<div id="graph"></div>
+<div id="sidebar">
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search nodes..." autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <div id="info-panel">
+    <h3>Node Info</h3>
+    <div id="info-content"><span class="empty">Click a node to inspect it</span></div>
+  </div>
+  <div id="legend-wrap">
+    <h3>Communities</h3>
+    <div id="legend"></div>
+  </div>
+  <div id="stats">54 nodes &middot; 38 edges &middot; 23 communities</div>
+</div>
+<script>
+const RAW_NODES = [{"id": "tailwind_config_ts", "label": "tailwind.config.ts", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "tailwind.config.ts", "community": 13, "community_name": "Tailwind Config", "source_file": "tailwind.config.ts", "file_type": "code", "degree": 0}, {"id": "vite_config_ts", "label": "vite.config.ts", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "vite.config.ts", "community": 14, "community_name": "Vite Config", "source_file": "vite.config.ts", "file_type": "code", "degree": 0}, {"id": "postcss_config_js", "label": "postcss.config.js", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "postcss.config.js", "community": 15, "community_name": "PostCSS Config", "source_file": "postcss.config.js", "file_type": "code", "degree": 0}, {"id": "src_app_tsx", "label": "App.tsx", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "App.tsx", "community": 5, "community_name": "App Root", "source_file": "src/App.tsx", "file_type": "code", "degree": 1}, {"id": "app_app", "label": "App()", "color": {"background": "#EDC948", "border": "#EDC948", "highlight": {"background": "#ffffff", "border": "#EDC948"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "App()", "community": 5, "community_name": "App Root", "source_file": "src/App.tsx", "file_type": "code", "degree": 1}, {"id": "src_main_tsx", "label": "main.tsx", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "main.tsx", "community": 16, "community_name": "Main Entry", "source_file": "src/main.tsx", "file_type": "code", "degree": 0}, {"id": "src_types_index_ts", "label": "index.ts", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "index.ts", "community": 17, "community_name": "Types", "source_file": "src/types/index.ts", "file_type": "code", "degree": 0}, {"id": "src_components_hero_tsx", "label": "Hero.tsx", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Hero.tsx", "community": 6, "community_name": "Hero Section", "source_file": "src/components/Hero.tsx", "file_type": "code", "degree": 1}, {"id": "hero_hero", "label": "Hero()", "color": {"background": "#B07AA1", "border": "#B07AA1", "highlight": {"background": "#ffffff", "border": "#B07AA1"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Hero()", "community": 6, "community_name": "Hero Section", "source_file": "src/components/Hero.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_nonnegotiables_tsx", "label": "NonNegotiables.tsx", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "NonNegotiables.tsx", "community": 7, "community_name": "Non-Negotiables Section", "source_file": "src/components/NonNegotiables.tsx", "file_type": "code", "degree": 1}, {"id": "nonnegotiables_nonnegotiables", "label": "NonNegotiables()", "color": {"background": "#FF9DA7", "border": "#FF9DA7", "highlight": {"background": "#ffffff", "border": "#FF9DA7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "NonNegotiables()", "community": 7, "community_name": "Non-Negotiables Section", "source_file": "src/components/NonNegotiables.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_promptexplorer_tsx", "label": "PromptExplorer.tsx", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "PromptExplorer.tsx", "community": 8, "community_name": "Prompt Explorer", "source_file": "src/components/PromptExplorer.tsx", "file_type": "code", "degree": 1}, {"id": "promptexplorer_ontabkeydown", "label": "onTabKeyDown()", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "onTabKeyDown()", "community": 8, "community_name": "Prompt Explorer", "source_file": "src/components/PromptExplorer.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_raceframework_tsx", "label": "RaceFramework.tsx", "color": {"background": "#9C755F", "border": "#9C755F", "highlight": {"background": "#ffffff", "border": "#9C755F"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "RaceFramework.tsx", "community": 18, "community_name": "RACE Framework", "source_file": "src/components/RaceFramework.tsx", "file_type": "code", "degree": 0}, {"id": "src_components_promptcard_tsx", "label": "PromptCard.tsx", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "PromptCard.tsx", "community": 9, "community_name": "Prompt Card", "source_file": "src/components/PromptCard.tsx", "file_type": "code", "degree": 1}, {"id": "promptcard_clsx", "label": "clsx()", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "clsx()", "community": 9, "community_name": "Prompt Card", "source_file": "src/components/PromptCard.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_universalprompts_tsx", "label": "UniversalPrompts.tsx", "color": {"background": "#BAB0AC", "border": "#BAB0AC", "highlight": {"background": "#ffffff", "border": "#BAB0AC"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "UniversalPrompts.tsx", "community": 19, "community_name": "Universal Prompts", "source_file": "src/components/UniversalPrompts.tsx", "file_type": "code", "degree": 0}, {"id": "src_components_toast_tsx", "label": "Toast.tsx", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Toast.tsx", "community": 2, "community_name": "Copy Toast State", "source_file": "src/components/Toast.tsx", "file_type": "code", "degree": 1}, {"id": "toast_usetoast", "label": "useToast()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "useToast()", "community": 2, "community_name": "Copy Toast State", "source_file": "src/components/Toast.tsx", "file_type": "code", "degree": 2}, {"id": "src_components_layout_nav_tsx", "label": "Nav.tsx", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Nav.tsx", "community": 10, "community_name": "Nav", "source_file": "src/components/layout/Nav.tsx", "file_type": "code", "degree": 1}, {"id": "nav_nav", "label": "Nav()", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Nav()", "community": 10, "community_name": "Nav", "source_file": "src/components/layout/Nav.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_layout_section_tsx", "label": "Section.tsx", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Section.tsx", "community": 20, "community_name": "Section Shell", "source_file": "src/components/layout/Section.tsx", "file_type": "code", "degree": 0}, {"id": "src_components_layout_footer_tsx", "label": "Footer.tsx", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Footer.tsx", "community": 11, "community_name": "Footer", "source_file": "src/components/layout/Footer.tsx", "file_type": "code", "degree": 1}, {"id": "footer_footer", "label": "Footer()", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Footer()", "community": 11, "community_name": "Footer", "source_file": "src/components/layout/Footer.tsx", "file_type": "code", "degree": 1}, {"id": "src_components_layout_reveal_tsx", "label": "Reveal.tsx", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Reveal.tsx", "community": 12, "community_name": "Reveal Animation", "source_file": "src/components/layout/Reveal.tsx", "file_type": "code", "degree": 1}, {"id": "reveal_reveal", "label": "Reveal()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Reveal()", "community": 12, "community_name": "Reveal Animation", "source_file": "src/components/layout/Reveal.tsx", "file_type": "code", "degree": 1}, {"id": "src_hooks_usecopy_ts", "label": "useCopy.ts", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "useCopy.ts", "community": 2, "community_name": "Copy Toast State", "source_file": "src/hooks/useCopy.ts", "file_type": "code", "degree": 1}, {"id": "usecopy_usecopy", "label": "useCopy()", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "useCopy()", "community": 2, "community_name": "Copy Toast State", "source_file": "src/hooks/useCopy.ts", "file_type": "code", "degree": 2}, {"id": "src_lib_copy_ts", "label": "copy.ts", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "copy.ts", "community": 4, "community_name": "Clipboard Utility", "source_file": "src/lib/copy.ts", "file_type": "code", "degree": 2}, {"id": "copy_copytext", "label": "copyText()", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "copyText()", "community": 4, "community_name": "Clipboard Utility", "source_file": "src/lib/copy.ts", "file_type": "code", "degree": 2}, {"id": "copy_copyfallback", "label": "copyFallback()", "color": {"background": "#59A14F", "border": "#59A14F", "highlight": {"background": "#ffffff", "border": "#59A14F"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "copyFallback()", "community": 4, "community_name": "Clipboard Utility", "source_file": "src/lib/copy.ts", "file_type": "code", "degree": 2}, {"id": "src_data_frameworks_ts", "label": "frameworks.ts", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "frameworks.ts", "community": 21, "community_name": "Frameworks Data", "source_file": "src/data/frameworks.ts", "file_type": "code", "degree": 0}, {"id": "src_data_prompts_ts", "label": "prompts.ts", "color": {"background": "#E15759", "border": "#E15759", "highlight": {"background": "#ffffff", "border": "#E15759"}}, "size": 10.0, "font": {"size": 0, "color": "#ffffff"}, "title": "prompts.ts", "community": 22, "community_name": "Prompts Data", "source_file": "src/data/prompts.ts", "file_type": "code", "degree": 0}, {"id": "readme_prompt_toolkit", "label": "AI as Your Analyst \u2014 Prompt Toolkit", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 40.0, "font": {"size": 12, "color": "#ffffff"}, "title": "AI as Your Analyst \u2014 Prompt Toolkit", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "document", "degree": 10}, {"id": "readme_vite", "label": "Vite", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Vite", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "tool", "degree": 1}, {"id": "readme_react_19", "label": "React 19", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "React 19", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "README.md", "file_type": "library", "degree": 2}, {"id": "readme_typescript", "label": "TypeScript", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "TypeScript", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "language", "degree": 1}, {"id": "readme_tailwind_css_v3", "label": "Tailwind CSS v3", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "Tailwind CSS v3", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "library", "degree": 2}, {"id": "readme_framer_motion", "label": "Framer Motion", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Framer Motion", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "library", "degree": 1}, {"id": "readme_lucide_react", "label": "lucide-react", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "lucide-react", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "library", "degree": 1}, {"id": "readme_prompts_data", "label": "prompts.ts (prompt content)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "prompts.ts (prompt content)", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "source_file", "degree": 1}, {"id": "readme_frameworks_data", "label": "frameworks.ts (frameworks/guardrails)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "frameworks.ts (frameworks/guardrails)", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "source_file", "degree": 1}, {"id": "readme_tailwind_config", "label": "tailwind.config.ts (editorial theme tokens)", "color": {"background": "#4E79A7", "border": "#4E79A7", "highlight": {"background": "#ffffff", "border": "#4E79A7"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "tailwind.config.ts (editorial theme tokens)", "community": 0, "community_name": "Build & Design Stack", "source_file": "README.md", "file_type": "config_file", "degree": 1}, {"id": "readme_vite_config", "label": "vite.config.ts (base path)", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "vite.config.ts (base path)", "community": 3, "community_name": "Static Deploy Config", "source_file": "README.md", "file_type": "config_file", "degree": 2}, {"id": "readme_github_pages_deploy", "label": "GitHub Pages Deploy Workflow", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 19.0, "font": {"size": 12, "color": "#ffffff"}, "title": "GitHub Pages Deploy Workflow", "community": 3, "community_name": "Static Deploy Config", "source_file": "README.md", "file_type": "config_file", "degree": 3}, {"id": "readme_static_no_backend", "label": "Fully static, no backend", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Fully static, no backend", "community": 3, "community_name": "Static Deploy Config", "source_file": "README.md", "file_type": "rationale", "degree": 1}, {"id": "readme_base_path_rationale", "label": "Base path /prompt-toolkit/ rename note", "color": {"background": "#76B7B2", "border": "#76B7B2", "highlight": {"background": "#ffffff", "border": "#76B7B2"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Base path /prompt-toolkit/ rename note", "community": 3, "community_name": "Static Deploy Config", "source_file": "README.md", "file_type": "rationale", "degree": 1}, {"id": "index_html_entry", "label": "index.html (app entry)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 31.0, "font": {"size": 12, "color": "#ffffff"}, "title": "index.html (app entry)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "document", "degree": 7}, {"id": "index_main_tsx", "label": "src/main.tsx (module entry)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 19.0, "font": {"size": 12, "color": "#ffffff"}, "title": "src/main.tsx (module entry)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "source_file", "degree": 3}, {"id": "index_root_div", "label": "#root mount node", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "#root mount node", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "element", "degree": 2}, {"id": "index_google_fonts", "label": "Google Fonts (Playfair Display, Epilogue, JetBrains Mono)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 13.0, "font": {"size": 0, "color": "#ffffff"}, "title": "Google Fonts (Playfair Display, Epilogue, JetBrains Mono)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "resource", "degree": 1}, {"id": "index_claude", "label": "Claude (LLM)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "Claude (LLM)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "entity", "degree": 2}, {"id": "index_chatgpt", "label": "ChatGPT (LLM)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 19.0, "font": {"size": 12, "color": "#ffffff"}, "title": "ChatGPT (LLM)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "entity", "degree": 3}, {"id": "index_gemini", "label": "Gemini (LLM)", "color": {"background": "#F28E2B", "border": "#F28E2B", "highlight": {"background": "#ffffff", "border": "#F28E2B"}}, "size": 16.0, "font": {"size": 12, "color": "#ffffff"}, "title": "Gemini (LLM)", "community": 1, "community_name": "App Entry & LLM Targets", "source_file": "index.html", "file_type": "entity", "degree": 2}];
+const RAW_EDGES = [{"from": "src_app_tsx", "to": "app_app", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_hero_tsx", "to": "hero_hero", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_nonnegotiables_tsx", "to": "nonnegotiables_nonnegotiables", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_promptexplorer_tsx", "to": "promptexplorer_ontabkeydown", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_promptcard_tsx", "to": "promptcard_clsx", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_toast_tsx", "to": "toast_usetoast", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "toast_usetoast", "to": "usecopy_usecopy", "label": "calls", "title": "calls [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "src_components_layout_nav_tsx", "to": "nav_nav", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_layout_footer_tsx", "to": "footer_footer", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_components_layout_reveal_tsx", "to": "reveal_reveal", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_hooks_usecopy_ts", "to": "usecopy_usecopy", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_lib_copy_ts", "to": "copy_copytext", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "src_lib_copy_ts", "to": "copy_copyfallback", "label": "contains", "title": "contains [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "copy_copytext", "to": "copy_copyfallback", "label": "calls", "title": "calls [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_vite", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_react_19", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_typescript", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_tailwind_css_v3", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_framer_motion", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_lucide_react", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_prompts_data", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_frameworks_data", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "readme_github_pages_deploy", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_prompt_toolkit", "to": "index_html_entry", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "readme_react_19", "to": "index_main_tsx", "label": "conceptually_related_to", "title": "conceptually_related_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "readme_tailwind_css_v3", "to": "readme_tailwind_config", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_vite_config", "to": "readme_github_pages_deploy", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_vite_config", "to": "readme_base_path_rationale", "label": "rationale_for", "title": "rationale_for [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "readme_github_pages_deploy", "to": "readme_static_no_backend", "label": "rationale_for", "title": "rationale_for [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "index_html_entry", "to": "index_main_tsx", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_html_entry", "to": "index_root_div", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_html_entry", "to": "index_google_fonts", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_html_entry", "to": "index_claude", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_html_entry", "to": "index_chatgpt", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_html_entry", "to": "index_gemini", "label": "references", "title": "references [EXTRACTED]", "dashes": false, "width": 2, "color": {"opacity": 0.7}, "confidence": "EXTRACTED"}, {"from": "index_main_tsx", "to": "index_root_div", "label": "references", "title": "references [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "index_claude", "to": "index_chatgpt", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}, {"from": "index_chatgpt", "to": "index_gemini", "label": "semantically_similar_to", "title": "semantically_similar_to [INFERRED]", "dashes": true, "width": 1, "color": {"opacity": 0.35}, "confidence": "INFERRED"}];
+const LEGEND = [{"cid": 0, "color": "#4E79A7", "label": "Build &amp; Design Stack", "count": 9}, {"cid": 1, "color": "#F28E2B", "label": "App Entry &amp; LLM Targets", "count": 8}, {"cid": 2, "color": "#E15759", "label": "Copy Toast State", "count": 4}, {"cid": 3, "color": "#76B7B2", "label": "Static Deploy Config", "count": 4}, {"cid": 4, "color": "#59A14F", "label": "Clipboard Utility", "count": 3}, {"cid": 5, "color": "#EDC948", "label": "App Root", "count": 2}, {"cid": 6, "color": "#B07AA1", "label": "Hero Section", "count": 2}, {"cid": 7, "color": "#FF9DA7", "label": "Non-Negotiables Section", "count": 2}, {"cid": 8, "color": "#9C755F", "label": "Prompt Explorer", "count": 2}, {"cid": 9, "color": "#BAB0AC", "label": "Prompt Card", "count": 2}, {"cid": 10, "color": "#4E79A7", "label": "Nav", "count": 2}, {"cid": 11, "color": "#F28E2B", "label": "Footer", "count": 2}, {"cid": 12, "color": "#E15759", "label": "Reveal Animation", "count": 2}, {"cid": 13, "color": "#76B7B2", "label": "Tailwind Config", "count": 1}, {"cid": 14, "color": "#59A14F", "label": "Vite Config", "count": 1}, {"cid": 15, "color": "#EDC948", "label": "PostCSS Config", "count": 1}, {"cid": 16, "color": "#B07AA1", "label": "Main Entry", "count": 1}, {"cid": 17, "color": "#FF9DA7", "label": "Types", "count": 1}, {"cid": 18, "color": "#9C755F", "label": "RACE Framework", "count": 1}, {"cid": 19, "color": "#BAB0AC", "label": "Universal Prompts", "count": 1}, {"cid": 20, "color": "#4E79A7", "label": "Section Shell", "count": 1}, {"cid": 21, "color": "#F28E2B", "label": "Frameworks Data", "count": 1}, {"cid": 22, "color": "#E15759", "label": "Prompts Data", "count": 1}];
+
+// HTML-escape helper — prevents XSS when injecting graph data into innerHTML
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Build vis datasets
+const nodesDS = new vis.DataSet(RAW_NODES.map(n => ({
+  id: n.id, label: n.label, color: n.color, size: n.size,
+  font: n.font, title: n.title,
+  _community: n.community, _community_name: n.community_name,
+  _source_file: n.source_file, _file_type: n.file_type, _degree: n.degree,
+})));
+
+const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({
+  id: i, from: e.from, to: e.to,
+  label: '',
+  title: e.title,
+  dashes: e.dashes,
+  width: e.width,
+  color: e.color,
+  arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+})));
+
+const container = document.getElementById('graph');
+const network = new vis.Network(container, { nodes: nodesDS, edges: edgesDS }, {
+  physics: {
+    enabled: true,
+    solver: 'forceAtlas2Based',
+    forceAtlas2Based: {
+      gravitationalConstant: -60,
+      centralGravity: 0.005,
+      springLength: 120,
+      springConstant: 0.08,
+      damping: 0.4,
+      avoidOverlap: 0.8,
+    },
+    stabilization: { iterations: 200, fit: true },
+  },
+  interaction: {
+    hover: true,
+    tooltipDelay: 100,
+    hideEdgesOnDrag: true,
+    navigationButtons: false,
+    keyboard: false,
+  },
+  nodes: { shape: 'dot', borderWidth: 1.5 },
+  edges: { smooth: { type: 'continuous', roundness: 0.2 }, selectionWidth: 3 },
+});
+
+network.once('stabilizationIterationsDone', () => {
+  network.setOptions({ physics: { enabled: false } });
+});
+
+function showInfo(nodeId) {
+  const n = nodesDS.get(nodeId);
+  if (!n) return;
+  const neighborIds = network.getConnectedNodes(nodeId);
+  const neighborItems = neighborIds.map(nid => {
+    const nb = nodesDS.get(nid);
+    const color = nb ? nb.color.background : '#555';
+    return `<span class="neighbor-link" style="border-left-color:${esc(color)}" onclick="focusNode(${JSON.stringify(nid)})">${esc(nb ? nb.label : nid)}</span>`;
+  }).join('');
+  document.getElementById('info-content').innerHTML = `
+    <div class="field"><b>${esc(n.label)}</b></div>
+    <div class="field">Type: ${esc(n._file_type || 'unknown')}</div>
+    <div class="field">Community: ${esc(n._community_name)}</div>
+    <div class="field">Source: ${esc(n._source_file || '-')}</div>
+    <div class="field">Degree: ${n._degree}</div>
+    ${neighborIds.length ? `<div class="field" style="margin-top:8px;color:#aaa;font-size:11px">Neighbors (${neighborIds.length})</div><div id="neighbors-list">${neighborItems}</div>` : ''}
+  `;
+}
+
+function focusNode(nodeId) {
+  network.focus(nodeId, { scale: 1.4, animation: true });
+  network.selectNodes([nodeId]);
+  showInfo(nodeId);
+}
+
+// Track hovered node — hover detection is more reliable than click params
+let hoveredNodeId = null;
+network.on('hoverNode', params => {
+  hoveredNodeId = params.node;
+  container.style.cursor = 'pointer';
+});
+network.on('blurNode', () => {
+  hoveredNodeId = null;
+  container.style.cursor = 'default';
+});
+container.addEventListener('click', () => {
+  if (hoveredNodeId !== null) {
+    showInfo(hoveredNodeId);
+    network.selectNodes([hoveredNodeId]);
+  }
+});
+network.on('click', params => {
+  if (params.nodes.length > 0) {
+    showInfo(params.nodes[0]);
+  } else if (hoveredNodeId === null) {
+    document.getElementById('info-content').innerHTML = '<span class="empty">Click a node to inspect it</span>';
+  }
+});
+
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.toLowerCase().trim();
+  searchResults.innerHTML = '';
+  if (!q) { searchResults.style.display = 'none'; return; }
+  const matches = RAW_NODES.filter(n => n.label.toLowerCase().includes(q)).slice(0, 20);
+  if (!matches.length) { searchResults.style.display = 'none'; return; }
+  searchResults.style.display = 'block';
+  matches.forEach(n => {
+    const el = document.createElement('div');
+    el.className = 'search-item';
+    el.textContent = n.label;
+    el.style.borderLeft = `3px solid ${n.color.background}`;
+    el.style.paddingLeft = '8px';
+    el.onclick = () => {
+      network.focus(n.id, { scale: 1.5, animation: true });
+      network.selectNodes([n.id]);
+      showInfo(n.id);
+      searchResults.style.display = 'none';
+      searchInput.value = '';
+    };
+    searchResults.appendChild(el);
+  });
+});
+document.addEventListener('click', e => {
+  if (!searchResults.contains(e.target) && e.target !== searchInput)
+    searchResults.style.display = 'none';
+});
+
+const hiddenCommunities = new Set();
+const legendEl = document.getElementById('legend');
+LEGEND.forEach(c => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${c.color}"></div>
+    <span class="legend-label">${c.label}</span>
+    <span class="legend-count">${c.count}</span>`;
+  item.onclick = () => {
+    if (hiddenCommunities.has(c.cid)) {
+      hiddenCommunities.delete(c.cid);
+      item.classList.remove('dimmed');
+    } else {
+      hiddenCommunities.add(c.cid);
+      item.classList.add('dimmed');
+    }
+    const updates = RAW_NODES
+      .filter(n => n.community === c.cid)
+      .map(n => ({ id: n.id, hidden: hiddenCommunities.has(c.cid) }));
+    nodesDS.update(updates);
+  };
+  legendEl.appendChild(item);
+});
+</script>
+<script>
+// Render hyperedges as shaded regions
+const hyperedges = [{"label": "Target LLMs for prompt paste", "members": ["index_claude", "index_chatgpt", "index_gemini"], "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "index.html", "source_location": "index.html:8"}, {"label": "Frontend build/runtime stack", "members": ["readme_vite", "readme_react_19", "readme_typescript", "readme_tailwind_css_v3", "readme_framer_motion"], "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": "README.md:9"}, {"label": "Editable content data layer", "members": ["readme_prompts_data", "readme_frameworks_data", "readme_prompt_toolkit"], "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": "README.md:26"}];
+// afterDrawing passes ctx already transformed to network coordinate space.
+// Draw node positions raw — no manual pan/zoom/DPR math needed.
+network.on('afterDrawing', function(ctx) {
+    hyperedges.forEach(h => {
+        const positions = h.nodes
+            .map(nid => network.getPositions([nid])[nid])
+            .filter(p => p !== undefined);
+        if (positions.length < 2) return;
+        ctx.save();
+        ctx.globalAlpha = 0.12;
+        ctx.fillStyle = '#6366f1';
+        ctx.strokeStyle = '#6366f1';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Centroid and expanded hull in network coordinates
+        const cx = positions.reduce((s, p) => s + p.x, 0) / positions.length;
+        const cy = positions.reduce((s, p) => s + p.y, 0) / positions.length;
+        const expanded = positions.map(p => ({
+            x: cx + (p.x - cx) * 1.15,
+            y: cy + (p.y - cy) * 1.15
+        }));
+        ctx.moveTo(expanded[0].x, expanded[0].y);
+        expanded.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 0.4;
+        ctx.stroke();
+        // Label
+        ctx.globalAlpha = 0.8;
+        ctx.fillStyle = '#4f46e5';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(h.label, cx, cy - 5);
+        ctx.restore();
+    });
+});
+</script>
+</body>
+</html>

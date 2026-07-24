@@ -1,0 +1,61 @@
+import { useEffect, useState } from 'react'
+import clsx from 'clsx'
+
+const LINKS = [
+  { href: '#frameworks', label: 'Frameworks' },
+  { href: '#primers', label: 'Primers' },
+  { href: '#universal', label: 'Universal' },
+  { href: '#non-negotiables', label: 'Non-Negotiables' },
+]
+
+export function Nav() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <header
+      className={clsx(
+        'sticky top-0 z-40 border-b transition-colors duration-300',
+        scrolled ? 'border-rule bg-paper/85 backdrop-blur-md' : 'border-transparent bg-transparent',
+      )}
+      style={{ paddingTop: 'env(safe-area-inset-top)' }}
+    >
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+        <a
+          href="#top"
+          className="flex items-baseline gap-2 font-display text-lg font-black tracking-tight text-ink"
+        >
+          Neil Baksi
+          <span className="font-mono text-[0.62rem] font-normal uppercase tracking-[0.2em] text-muted">
+            Prompt Toolkit
+          </span>
+        </a>
+        <ul className="hidden items-center gap-6 md:flex">
+          {LINKS.map((l) => (
+            <li key={l.href}>
+              <a
+                href={l.href}
+                className="font-mono text-[0.72rem] uppercase tracking-[0.14em] text-muted transition-colors hover:text-ink"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {/* Mobile: single anchor to the prompt library (primary destination) */}
+        <a
+          href="#primers"
+          className="flex min-h-[44px] items-center rounded-full border border-ink px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper md:hidden"
+        >
+          Prompts
+        </a>
+      </nav>
+    </header>
+  )
+}
