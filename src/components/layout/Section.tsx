@@ -16,11 +16,11 @@ interface SectionProps {
  */
 export function Section({ id, index, title, intro, children }: SectionProps) {
   return (
-    <section id={id} className="scroll-mt-24 border-t border-rule py-16 sm:py-20 lg:py-28">
+    <section id={id} className="scroll-mt-32 border-t border-rule py-16 sm:py-20 lg:py-28 md:scroll-mt-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Reveal>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3" aria-hidden>
               <div className="flex items-baseline gap-3 lg:flex-col lg:gap-1">
                 <span className="font-display text-5xl font-black leading-none text-gold sm:text-6xl">
                   {index}

@@ -20,8 +20,10 @@ export function NonNegotiables() {
           return (
             <Reveal key={g.title} delay={i * 0.06} className="bg-paper">
               <div className="flex h-full flex-col gap-3 p-6 sm:p-7">
-                <Icon size={22} strokeWidth={1.75} className="text-gold" aria-hidden />
-                <h3 className="font-display text-lg font-bold text-ink">{g.title}</h3>
+                <div className="flex items-center gap-2.5">
+                  <Icon size={18} strokeWidth={1.75} className="shrink-0 text-gold" aria-hidden />
+                  <h3 className="font-display text-lg font-bold text-ink">{g.title}</h3>
+                </div>
                 <p className="text-[0.92rem] leading-relaxed text-muted">{g.body}</p>
               </div>
             </Reveal>

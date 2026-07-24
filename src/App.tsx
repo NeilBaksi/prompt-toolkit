@@ -10,8 +10,14 @@ import { NonNegotiables } from './components/NonNegotiables'
 export default function App() {
   return (
     <ToastProvider>
+      <a
+        href="#main"
+        className="sr-only rounded-full bg-ink px-4 py-2 font-mono text-sm text-paper focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+      >
+        Skip to content
+      </a>
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <RaceFramework />
         <PromptExplorer />

@@ -38,7 +38,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
           whileTap={{ scale: 0.97 }}
           aria-label={copied ? 'Copied' : `Copy the "${prompt.title}" prompt`}
           className={clsx(
-            'flex min-h-[40px] shrink-0 items-center rounded-full border px-3.5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.1em] transition-colors duration-200',
+            'flex min-h-[44px] shrink-0 items-center rounded-full border px-3.5 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.1em] transition-colors duration-200',
             copied
               ? 'border-gold bg-gold/10 text-gold-deep'
               : 'border-ink bg-ink text-paper hover:bg-transparent hover:text-ink',

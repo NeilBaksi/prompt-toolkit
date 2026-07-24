@@ -16,7 +16,10 @@ export function useCopy() {
   const copy = useCallback(
     async (text: string) => {
       const ok = await copyText(text)
-      if (!ok) return
+      if (!ok) {
+        showToast('Couldn’t copy — select the text and copy manually', 'error')
+        return
+      }
       setCopied(true)
       showToast('Copied — paste into Claude, ChatGPT or Gemini')
       window.clearTimeout(timer.current)

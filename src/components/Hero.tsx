@@ -26,7 +26,7 @@ export function Hero() {
             className="mt-5 text-display-xl font-black text-ink"
           >
             AI as Your
-            <span className="block italic text-gold">Analyst</span>
+            <span className="block italic text-gold-deep">Analyst</span>
           </motion.h1>
 
           <motion.p

@@ -50,7 +50,7 @@ export function PromptExplorer() {
               onClick={() => setActive(c.id)}
               onKeyDown={(e) => onTabKeyDown(e, i)}
               className={clsx(
-                'flex min-h-[40px] shrink-0 snap-start items-center whitespace-nowrap rounded-full border px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.1em] transition-colors duration-200',
+                'flex min-h-[44px] shrink-0 snap-start items-center whitespace-nowrap rounded-full border px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.1em] transition-colors duration-200',
                 selected
                   ? 'border-ink bg-ink text-paper'
                   : 'border-rule text-muted hover:border-ink hover:text-ink',

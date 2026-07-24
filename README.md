@@ -4,7 +4,7 @@ A live, shareable prompt toolkit for analysts, consultants, and MBAs. Copy a
 prompt, paste it into **Claude, ChatGPT, or Gemini**, swap the `[brackets]` for
 your real context, and get client-ready output. Built by Neil Baksi.
 
-**Live:** `https://<your-username>.github.io/prompt-toolkit/`
+**Live demo:** https://neilbaksi.github.io/prompt-toolkit/
 
 ## What's inside
 
@@ -34,26 +34,6 @@ npm run dev      # http://localhost:5173/prompt-toolkit/
 npm run build    # tsc -b + vite build → dist/
 npm run preview  # serve the production build
 ```
-
-## Edit the content
-
-All copy is data, not JSX — no component edits needed:
-
-- **Prompts & categories** → [`src/data/prompts.ts`](src/data/prompts.ts)
-- **RACE framework & guardrails** → [`src/data/frameworks.ts`](src/data/frameworks.ts)
-
-`PromptCard` renders any prompt with a `kind` of `primer | task | polish`.
-
-## Deploy (GitHub Pages)
-
-1. Push to `main`. The workflow in
-   [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs `npm ci`,
-   builds, and publishes to GitHub Pages via GitHub Actions.
-2. In the repo: **Settings → Pages → Source → GitHub Actions**.
-
-The site serves from `/prompt-toolkit/`, set by `base` in
-[`vite.config.ts`](vite.config.ts). If you name the repo something else, update
-`base` to `/<repo-name>/` to match.
 
 ## License
 

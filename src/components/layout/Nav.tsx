@@ -48,14 +48,24 @@ export function Nav() {
             </li>
           ))}
         </ul>
-        {/* Mobile: single anchor to the prompt library (primary destination) */}
-        <a
-          href="#primers"
-          className="flex min-h-[44px] items-center rounded-full border border-ink px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper md:hidden"
-        >
-          Prompts
-        </a>
       </nav>
+
+      {/* Mobile: scroll-snap chip row so every section is reachable, not just Prompts */}
+      <ul
+        aria-label="Sections"
+        className="-mb-px flex snap-x snap-mandatory gap-2 overflow-x-auto border-t border-rule/60 px-5 py-2 [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+      >
+        {LINKS.map((l) => (
+          <li key={l.href} className="shrink-0 snap-start">
+            <a
+              href={l.href}
+              className="flex min-h-[44px] items-center whitespace-nowrap rounded-full border border-rule px-4 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-muted transition-colors hover:border-ink hover:text-ink"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </header>
   )
 }
